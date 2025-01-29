@@ -6,5 +6,6 @@ import git.darul.geocitysuggest.dto.response.GeoSuggestResponse;
 import java.util.List;
 
 public interface GeoSuggestService {
-    List<GeoSuggestResponse> findByName(GeoSuggestRequest request);
+    List<GeoSuggestResponse> suggestByNameAndLocation(GeoSuggestRequest request);
+    List<String> suggestCityName(String prefix);
 }

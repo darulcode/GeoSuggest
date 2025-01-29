@@ -23,9 +23,7 @@ public class FileLoader {
                     isHeader = false;
                     continue;
                 }
-
                 String[] parts = line.split("\t");
-
                 try {
                     Integer id = Integer.parseInt(parts[0]);
                     String name = parts[1];
@@ -44,5 +42,7 @@ public class FileLoader {
         }
         return cities;
     }
+
+
 
 }
