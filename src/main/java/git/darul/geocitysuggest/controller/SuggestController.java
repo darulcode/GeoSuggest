@@ -1,9 +1,9 @@
 package git.darul.geocitysuggest.controller;
 
 import git.darul.geocitysuggest.constants.Constants;
-import git.darul.geocitysuggest.entity.City;
+import git.darul.geocitysuggest.dto.request.GeoSuggestRequest;
+import git.darul.geocitysuggest.dto.response.GeoSuggestResponse;
 import git.darul.geocitysuggest.services.GeoSuggestService;
-import git.darul.geocitysuggest.utils.FileLoader;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,8 +26,13 @@ public class SuggestController {
             @RequestParam(required = false) Double latitude,
             @RequestParam(required = false) Double longitude
     ) {
-        List<City> cities = geoSuggestService.findByName("darul");
+        GeoSuggestRequest request = GeoSuggestRequest.builder()
+                .query(query)
+                .latitude(latitude)
+                .longitude(longitude)
+                .build();
+        List<GeoSuggestResponse> responses = geoSuggestService.findByName(request);
 //        TODO: response api diperbaiki
-        return ResponseEntity.ok(cities);
+        return ResponseEntity.ok(responses);
     }
 }

@@ -1,9 +1,10 @@
 package git.darul.geocitysuggest.services;
 
-import git.darul.geocitysuggest.entity.City;
+import git.darul.geocitysuggest.dto.request.GeoSuggestRequest;
+import git.darul.geocitysuggest.dto.response.GeoSuggestResponse;
 
 import java.util.List;
 
 public interface GeoSuggestService {
-    List<City> findByName(String name);
+    List<GeoSuggestResponse> findByName(GeoSuggestRequest request);
 }
