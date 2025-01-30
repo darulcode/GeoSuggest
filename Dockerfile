@@ -1,23 +1,22 @@
-# Menggunakan image OpenJDK 17 sebagai base image
-FROM openjdk:17-jdk-slim
-
-# Menetapkan direktori kerja di dalam container
+# Tahap 1: Build Maven
+FROM maven:3.8.8-eclipse-temurin-17 AS builder
 WORKDIR /app
 
-# Menyalin pom.xml terlebih dahulu untuk memanfaatkan cache layer dari Docker
-COPY pom.xml /app/
+# Salin semua file source ke dalam container
+COPY . .
 
-# Menginstal Maven
-RUN apt-get update && apt-get install -y maven
+# Jalankan build dengan Maven
+RUN mvn clean package -DskipTests
 
-# Menjalankan perintah untuk melakukan build aplikasi menggunakan Maven
-RUN mvn clean package
+# Tahap 2: Jalankan aplikasi dengan OpenJDK
+FROM openjdk:17-jdk-slim
+WORKDIR /app
 
-# Menyalin file JAR yang telah dihasilkan dari build
-COPY target/GeoCitySuggest-0.0.1-SNAPSHOT.jar /app/app.jar
+# Salin hasil build dari tahap pertama
+COPY --from=builder /app/target/GeoCitySuggest-0.0.1-SNAPSHOT.jar app.jar
 
-# Mengekspos port 8080 untuk aplikasi
+# Buka port 8080
 EXPOSE 8080
 
-# Menentukan perintah yang akan dijalankan di container
+# Jalankan aplikasi
 ENTRYPOINT ["java", "-jar", "app.jar"]
