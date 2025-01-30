@@ -46,10 +46,19 @@
             <scope>annotationProcessor</scope>
         </dependency>
         <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-text</artifactId>
-            <version>1.10.0</version>
+            <groupId>org.powermock</groupId>
+            <artifactId>powermock-module-junit4</artifactId>
+            <version>2.0.9</version>
+            <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-inline</artifactId>
+            <version>4.0.0</version> <!-- Pastikan versi ini sesuai dengan versi Mockito yang Anda gunakan -->
+            <scope>test</scope>
+        </dependency>
+
+
 
     </dependencies>
 

@@ -25,14 +25,13 @@ public class FileLoader {
                 }
                 String[] parts = line.split("\t");
                 try {
-                    Integer id = Integer.parseInt(parts[0]);
                     String name = parts[1];
                     double latitude = Double.parseDouble(parts[4]);
                     double longitude = Double.parseDouble(parts[5]);
                     String country = parts[8];
                     String admin1 = parts[10];
 
-                    cities.add(new City(id, name, latitude, longitude, country, admin1));
+                    cities.add(new City( name, latitude, longitude, country, admin1));
                 } catch (NumberFormatException e) {
                     System.out.println("Skipping invalid line: " + line);
                 }

@@ -45,7 +45,7 @@ public class GeoSuggestServiceImpl implements GeoSuggestService {
 
     @Override
     public List<String> suggestCityName(String prefix) {
-        return cityRepository.findCityName(prefix).stream().limit(10).collect(Collectors.toList());
+        return cityRepository.findCityName(prefix).stream().limit(5).collect(Collectors.toList());
     }
 
     private GeoSuggestResponse getGeoSuggestResponse(City city, Double latitude, Double longitude) {
